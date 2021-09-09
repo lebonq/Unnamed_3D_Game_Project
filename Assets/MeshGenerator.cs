@@ -82,17 +82,27 @@ public class MeshGenerator : MonoBehaviour
         for (int i = 1; i < (nbSegementX + 2); i++)
         {
             vertices[cpt] = new Vector3((step_x * i) - size.x * 0.5f, 0,  size.z * 0.5f);
-            vertices[cpt+1] = new Vector3((step_x * i) - size.x * 0.5f, 0, -size.z * 0.5f);
+            vertices[cpt+1] = new Vector3((step_x * i) - (size.x * 0.5f), 0, -size.z * 0.5f);
             cpt += 2;
         }
 
-        Debug.Log("Triangles");
-        for (int i = 0; i <= (triangles.Length/3)-2; i+=2)
-        {
-            triangles[i*3] = i;
-            triangles[3*i+1] = i+1; 
-            triangles[3*i+2] = i+2;
+        int idxTriangles = 0;
 
+        Debug.Log("Triangles");
+        for (int i = 0; i <= (triangles.Length/3)-1; i++)
+        {
+            if(i % 2 == 0){
+                triangles[idxTriangles] = i+2;
+                triangles[idxTriangles+1] = i+1; 
+                triangles[idxTriangles+2] = i;
+            }
+            else{
+                triangles[idxTriangles] = i;
+                triangles[idxTriangles+1] = i+1; 
+                triangles[idxTriangles+2] = i+2;
+            }
+            
+            idxTriangles +=3;
         }
 
         mesh.vertices = vertices;
@@ -100,8 +110,6 @@ public class MeshGenerator : MonoBehaviour
 
         return mesh;
     }
-
-
 
     // Start is called before the first frame update
     void Start()
