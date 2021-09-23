@@ -28,9 +28,15 @@ public class TerrainCreator : MonoBehaviour
 
         //m_Mf.sharedMesh = GenerateCylinder(40, 10, 2, 6, (kx,kZ)=>m_GlassProfile.Evaluate(kZ));
 
-        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(100, 100, new Vector3(10, 3, 10),
-            (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
+        //m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(100, 100, new Vector3(10, 3, 10),
+        //    (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
+        //    );
+
+        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(100, 100, new Vector3(100, 30, 100),
+            (kX,kZ) => kX*kX + kZ* kZ
             );
+
+
         gameObject.AddComponent<MeshCollider>();
     }
 
