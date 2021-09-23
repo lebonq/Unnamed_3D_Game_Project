@@ -110,7 +110,7 @@ public class PlanetGenerator : MonoBehaviour
                     float kTheta = theta / (2 * Mathf.PI);
                     float kPhi = phi / Mathf.PI;
 
-                    uv[offset + 1] = new Vector2(kTheta, 1 - kPhi);
+                    uv[offset + i] = new Vector2(kTheta, 1 - kPhi);
                 }
                 offset += divisions + 1;
             }
