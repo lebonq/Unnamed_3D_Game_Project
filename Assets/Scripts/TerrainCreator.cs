@@ -34,12 +34,20 @@ public class TerrainCreator : MonoBehaviour
         //    (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
         //    );
 
-        int offSetX = Random.Range(-100000, 100000);
-        int offSetZ = Random.Range(-100000, 100000);
+        float offSetX = Random.Range(-100000f, 100000f);
+        float offSetZ = Random.Range(-100000f, 100000f);
+
+        float offSetX2 = Random.Range(-100000f, 100000f);
+        float offSetZ2 = Random.Range(-100000f, 100000f);
+
+        float offSetX3 = Random.Range(-100000f, 100000f);
+        float offSetZ3 = Random.Range(-100000f, 100000f);
 
         m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(500, 500, new Vector3(m_XSize, 40, m_ZSize),
-            (kX, kZ) => Mathf.PerlinNoise((kX * 0.002f * m_XSize ) + offSetX, (kZ * 0.003f * m_ZSize) + offSetZ) 
-            );
+            (kX, kZ) => Mathf.PerlinNoise((kX * 0.001f * m_XSize) + offSetX, (kZ * 0.001f * m_ZSize) + offSetZ) * 1.25f +
+                        Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX2, (kZ * 0.0004f * m_ZSize) + offSetZ2) * 6f +
+                        Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX3, (kZ * 0.0004f * m_ZSize) + offSetZ3) * 6f
+            ) ;
 
 
         gameObject.AddComponent<MeshCollider>();
@@ -73,7 +81,6 @@ public class TerrainCreator : MonoBehaviour
         for (int i = 0; i < nSegmentsX + 1; i++)
         {
             float kX = (float)i / nSegmentsX; // ratio
-            Debug.Log(kX);
             int indexOffset = i * (nSegmentsZ + 1);
 
             for (int j = 0; j < nSegmentsZ + 1; j++)
