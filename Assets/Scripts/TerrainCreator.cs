@@ -13,6 +13,8 @@ public class TerrainCreator : MonoBehaviour
 
     [SerializeField] AnimationCurve m_GlassProfile;
     [SerializeField] Texture2D m_HeightMap;
+    [SerializeField] int m_XSize;
+    [SerializeField] int m_ZSize;
 
     private void Awake()
     {
@@ -32,8 +34,11 @@ public class TerrainCreator : MonoBehaviour
         //    (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
         //    );
 
-        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(100, 100, new Vector3(100, 30, 100),
-            (kX,kZ) => kX*kX + kZ* kZ
+        int offSetX = Random.Range(-100000, 100000);
+        int offSetZ = Random.Range(-100000, 100000);
+
+        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(500, 500, new Vector3(m_XSize, 40, m_ZSize),
+            (kX, kZ) => Mathf.PerlinNoise((kX * 0.002f * m_XSize ) + offSetX, (kZ * 0.003f * m_ZSize) + offSetZ) 
             );
 
 
@@ -45,7 +50,7 @@ public class TerrainCreator : MonoBehaviour
         Vector3 halfSize = size * .5f;
         ComputeVertexPos terrainFunc = (kX, kZ) => new Vector3(
                             Mathf.Lerp(-halfSize.x, halfSize.x, kX),
-                            size.y * heightFunc(kX, kZ),
+                            size.y * heightFunc(kX*5, kZ*5),
                             Mathf.Lerp(-halfSize.z, halfSize.z, kZ));
         return GeneratePlane(nSegmentsX, nSegmentsZ, terrainFunc);
     }
@@ -68,6 +73,7 @@ public class TerrainCreator : MonoBehaviour
         for (int i = 0; i < nSegmentsX + 1; i++)
         {
             float kX = (float)i / nSegmentsX; // ratio
+            Debug.Log(kX);
             int indexOffset = i * (nSegmentsZ + 1);
 
             for (int j = 0; j < nSegmentsZ + 1; j++)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    float m_WalkSpeed = 0.01f;
+    float m_WalkSpeed = 1f;
     float m_RunSpeed = 0.05f;
     float m_JumpSpeed = 0f;
 
