@@ -89,9 +89,13 @@ public class PlanetGenerator : MonoBehaviour
 
             for (int j = 0; j < divisions + 1; ++j)
             {
+                float kZ = (float)j / divisions;
+
                 Vector3 j3 = new Vector3(j, j, j);
                 for (int i = 0; i < divisions + 1; ++i)
                 {
+                    float kX = (float)i / divisions;
+
                     Vector3 i3 = new Vector3(i, i, i);
                     Vector3 p = origin + Mult(step3, Mult(i3, right) + Mult(j3, up));
                     Vector3 p2 = Mult(p, p);
@@ -99,7 +103,7 @@ public class PlanetGenerator : MonoBehaviour
                                             p.y * Mathf.Sqrt(1.0f - 0.5f * (p2.z + p2.x) + p2.z * p2.x / 3.0f),
                                             p.z * Mathf.Sqrt(1.0f - 0.5f * (p2.x + p2.y) + p2.x * p2.y / 3.0f));
 
-                    vertices[offset + i] = vertexPos.normalized * radius;
+                    vertices[offset + i] = vertexPos.normalized * heightFunction(kX,kZ) * radius;
                     normals[offset + i] = vertices[offset + i].normalized;
 
                     Spherical sph = CoordConvert.CartesianToSpherical(vertexPos);
