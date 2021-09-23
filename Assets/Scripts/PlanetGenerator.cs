@@ -57,7 +57,7 @@ public class PlanetGenerator : MonoBehaviour
 
 
         ComputeValueDelegate heightFunction = (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale;
-        m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius, 0.2f, heightFunction);
+        m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius, 0.03f, heightFunction);
     }
 
     Vector3 Mult(Vector3 a, Vector3 b)
