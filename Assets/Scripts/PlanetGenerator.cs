@@ -57,7 +57,7 @@ public class PlanetGenerator : MonoBehaviour
 
 
         ComputeValueDelegate heightFunction = (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale;
-        m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius, 50, heightFunction);
+        m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius, 0.2f, heightFunction);
     }
 
     Vector3 Mult(Vector3 a, Vector3 b)
@@ -103,7 +103,7 @@ public class PlanetGenerator : MonoBehaviour
                                             p.y * Mathf.Sqrt(1.0f - 0.5f * (p2.z + p2.x) + p2.z * p2.x / 3.0f),
                                             p.z * Mathf.Sqrt(1.0f - 0.5f * (p2.x + p2.y) + p2.x * p2.y / 3.0f));
 
-                    vertices[offset + i] = vertexPos.normalized * heightFunction(kX,kZ) * radius;
+                    vertices[offset + i] = vertexPos.normalized * radius * (1+heightFunction(kX, kZ) * heightsAmplitude);
                     normals[offset + i] = vertices[offset + i].normalized;
 
                     Spherical sph = CoordConvert.CartesianToSpherical(vertexPos);
