@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 using UnityEngine;
+using MyMathTools;
 
 static class CubeToSphere
 {
@@ -42,17 +43,21 @@ public class PlanetGenerator : MonoBehaviour
 {
     delegate float ComputeValueDelegate(float kx, float kz);
     delegate Vector3 ComputeVectorDelegate(float kx, float kz);
+    delegate Vector3 ComputeVertexPos(float k1, float k2);
 
     MeshFilter m_MeshFilter;
 
     [SerializeField] int m_SpherifiedCubeNDivisions;
     [SerializeField] int m_SpherifiedCubeRadius;
+    [SerializeField] Texture2D m_HeightMap;
 
     private void Awake()
     {
         m_MeshFilter = GetComponent<MeshFilter>();
 
-        m_MeshFilter.sharedMesh =    PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius);
+
+        ComputeValueDelegate heightFunction = (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale;
+        m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius, 50, heightFunction);
     }
 
     Vector3 Mult(Vector3 a, Vector3 b)
@@ -60,7 +65,7 @@ public class PlanetGenerator : MonoBehaviour
         return new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
     }
 
-    Mesh PlainSpherifiedCube(int divisions,float radius)
+    Mesh PlainSpherifiedCube(int divisions, float radius, float heightsAmplitude, ComputeValueDelegate heightFunction)
     // https://github.com/caosdoar/spheres/blob/master/src/spheres.cpp
     {
         Mesh mesh = new Mesh();
@@ -70,6 +75,7 @@ public class PlanetGenerator : MonoBehaviour
         Vector3[] vertices = new Vector3[6 * (divisions + 1) * (divisions + 1)];
         Vector3[] normals = new Vector3[vertices.Length];
         int[] triangles = new int[6 * divisions * divisions * 2 * 3];
+        Vector2[] uv = new Vector2[vertices.Length];
 
         float step = 1.0f / (float)divisions;
         Vector3 step3 = new Vector3(step, step, step);
@@ -93,9 +99,18 @@ public class PlanetGenerator : MonoBehaviour
                                             p.y * Mathf.Sqrt(1.0f - 0.5f * (p2.z + p2.x) + p2.z * p2.x / 3.0f),
                                             p.z * Mathf.Sqrt(1.0f - 0.5f * (p2.x + p2.y) + p2.x * p2.y / 3.0f));
 
-
                     vertices[offset + i] = vertexPos.normalized * radius;
                     normals[offset + i] = vertices[offset + i].normalized;
+
+                    Spherical sph = CoordConvert.CartesianToSpherical(vertexPos);
+                    float rho = sph.rho;
+                    float theta = sph.theta;
+                    float phi = sph.phi;
+
+                    float kTheta = theta / (2 * Mathf.PI);
+                    float kPhi = phi / Mathf.PI;
+
+                    uv[offset + 1] = new Vector2(kTheta, 1 - kPhi);
                 }
                 offset += divisions + 1;
             }
@@ -142,6 +157,7 @@ public class PlanetGenerator : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.normals = normals;
+        mesh.uv = uv;
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
