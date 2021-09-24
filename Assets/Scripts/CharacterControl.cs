@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    float m_WalkSpeed = 1f;
+    float m_WalkSpeed = 5f;
     float m_RunSpeed = 0.05f;
     float m_JumpSpeed = 0f;
+
+    Rigidbody m_Rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_Rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -32,19 +34,19 @@ public class CharacterControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.left * whichSpeed;
+            m_Rb.velocity = Vector3.left * whichSpeed;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * whichSpeed;
+            m_Rb.velocity = Vector3.right * whichSpeed;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position += Vector3.forward * whichSpeed;
+            m_Rb.velocity = Vector3.forward * whichSpeed;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += Vector3.back * whichSpeed;
+            m_Rb.velocity = Vector3.back * whichSpeed;
         }
     }
 }
