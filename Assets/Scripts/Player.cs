@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
         Vector3 moveVect = transform.forward * vInput * Time.fixedDeltaTime * m_TranslationSpeed;
         m_Rb.MovePosition(m_Rb.position+moveVect);
         m_Rb.MoveRotation(Quaternion.AngleAxis(hInput*Time.fixedDeltaTime*m_RotationSpeed,Vector3.up) * transform.rotation);
+
+        m_Rb.angularVelocity = Vector3.zero;
     }
 
     private void OnCollisionEnter(Collision collision){
