@@ -38,12 +38,13 @@ public class Player : MonoBehaviour
         // m_Rb.angularVelocity = Vector3.zero;
 
         // Use add force method to change de velocity
+        if(vInput != 0 || hInput != 0){
+            Vector3 velocityDelta = transform.forward * m_TranslationSpeed * vInput - m_Rb.velocity;
+            m_Rb.AddForce(velocityDelta,ForceMode.VelocityChange);
 
-        Vector3 velocityDelta = transform.forward * m_TranslationSpeed * vInput - m_Rb.velocity;
-        m_Rb.AddForce(velocityDelta,ForceMode.VelocityChange);
-
-        Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
-        m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
+            Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
+            m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
+        }
     }
 
     private void OnCollisionEnter(Collision collision){
