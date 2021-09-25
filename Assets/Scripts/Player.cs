@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
         // Use add force method to change de velocity
         if(vInput != 0 || hInput != 0){
-            Vector3 velocityDelta = transform.forward * m_TranslationSpeed * vInput * 9.81 - m_Rb.velocity;
+            Vector3 velocityDelta = transform.forward * m_TranslationSpeed * vInput - m_Rb.velocity;
             m_Rb.AddForce(velocityDelta,ForceMode.VelocityChange);
 
             Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
