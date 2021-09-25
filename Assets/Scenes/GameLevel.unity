@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103188470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 353.06, y: 1154, z: -32.59}
+  m_LocalPosition: {x: 353.06, y: 400, z: -32.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1187852190}
@@ -199,7 +199,6 @@ GameObject:
   - component: {fileID: 666098326}
   - component: {fileID: 666098325}
   - component: {fileID: 666098324}
-  - component: {fileID: 666098328}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -219,13 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2616ee78b5666244698fcc4e4ed1f34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GlassProfile:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_HeightMap: {fileID: 2800000, guid: db127918aeb0cbf4ca7692e3bcb17544, type: 3}
   m_XSize: 2000
   m_ZSize: 2000
 --- !u!23 &666098325
@@ -249,6 +241,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f2c3776e6e002dd4195083e0e1aa7718, type: 2}
+  - {fileID: 2100000, guid: 35fbba09807f8014e8c08874471fa8fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -292,20 +285,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &666098328
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666098323}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &1187852189
 GameObject:
   m_ObjectHideFlags: 0

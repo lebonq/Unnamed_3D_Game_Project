@@ -10,29 +10,12 @@ public class TerrainCreator : MonoBehaviour
     delegate Vector3 ComputeVertexPos(float k1, float k2);
 
     MeshFilter m_Mf;
-
-    [SerializeField] AnimationCurve m_GlassProfile;
-    [SerializeField] Texture2D m_HeightMap;
     [SerializeField] int m_XSize;
     [SerializeField] int m_ZSize;
 
     private void Awake()
     {
         m_Mf = GetComponent<MeshFilter>();
-        // m_Mf.sharedMesh = GenerateTriangle();
-        //m_Mf.sharedMesh = GenerateQuad(new Vector3(4,0,2));
-        //m_Mf.sharedMesh = GenerateStrip(new Vector3(4, 0, 2),10, k=>.125f*Mathf.Sin(k*Mathf.PI*2*4) );
-
-        //Vector3 halfSize = new Vector3(4, 0, 2);
-        //m_Mf.sharedMesh = GeneratePlane( 20,10, (kX,kZ) => new Vector3(Mathf.Lerp(-halfSize.x, halfSize.x, kX),
-        //                                               0,
-        //                                               Mathf.Lerp(-halfSize.z, halfSize.z, kZ)));//);// .125f * Mathf.Sin(kX* Mathf.PI * 2 * 4) * Mathf.Cos(kZ * Mathf.PI * 2 * 4));
-
-        //m_Mf.sharedMesh = GenerateCylinder(40, 10, 2, 6, (kx,kZ)=>m_GlassProfile.Evaluate(kZ));
-
-        //m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(100, 100, new Vector3(10, 3, 10),
-        //    (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale
-        //    );
 
         float offSetX = Random.Range(-100000f, 100000f);
         float offSetZ = Random.Range(-100000f, 100000f);
@@ -43,7 +26,7 @@ public class TerrainCreator : MonoBehaviour
         float offSetX3 = Random.Range(-100000f, 100000f);
         float offSetZ3 = Random.Range(-100000f, 100000f);
 
-        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(500, 500, new Vector3(m_XSize, 40, m_ZSize),
+        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(m_XSize/10, m_ZSize/10, new Vector3(m_XSize, 64, m_ZSize),
             (kX, kZ) => Mathf.PerlinNoise((kX * 0.001f * m_XSize) + offSetX, (kZ * 0.001f * m_ZSize) + offSetZ) * 1.25f +
                         Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX2, (kZ * 0.0004f * m_ZSize) + offSetZ2) * 6f +
                         Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX3, (kZ * 0.0004f * m_ZSize) + offSetZ3) * 6f
