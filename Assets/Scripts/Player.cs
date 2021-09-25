@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public m_TranslationSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float vInput = Input.getAxis("Vertical");
+        float hInput = Input.getAxis("Horizontal");
+
+        transform.position += transform.foward * vInput * Time.deltaTime * m_TranslationSpeed;
     }
 }
