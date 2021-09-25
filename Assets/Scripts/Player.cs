@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public m_TranslationSpeed;
+    public float m_TranslationSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +15,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float vInput = Input.getAxis("Vertical");
-        float hInput = Input.getAxis("Horizontal");
+        float vInput = Input.GetAxis("Vertical");
+        float hInput = Input.GetAxis("Horizontal");
 
-        transform.position += transform.foward * vInput * Time.deltaTime * m_TranslationSpeed;
+        transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
     }
 }
