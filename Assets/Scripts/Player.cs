@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     public float m_TranslationSpeed;
     public float m_RotationSpeed;
+    public GameObject Bullet;
 
     Rigidbody m_Rb;
     // Start is called before the first frame update
@@ -44,6 +45,13 @@ public class Player : MonoBehaviour
 
             Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
             m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            GameObject prefabcopy = Instantiate(Bullet, transform.position, Quaternion.identity) as GameObject;
+            prefabcopy.GetComponent<Rigidbody>().AddForce(transform.forward * 1500);
+            Destroy(prefabcopy, 1.0f);
         }
     }
 
