@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MapNoise;
 using MyMathTools;
 
 public class TerrainCreator : MonoBehaviour
@@ -17,21 +18,17 @@ public class TerrainCreator : MonoBehaviour
     {
         m_Mf = GetComponent<MeshFilter>();
 
-        float offSetX = Random.Range(-100000f, 100000f);
-        float offSetZ = Random.Range(-100000f, 100000f);
+        float offSetX = Random.Range(-200, 200);
+        float offSetZ = Random.Range(-200, 200);
 
-        float offSetX2 = Random.Range(-100000f, 100000f);
-        float offSetZ2 = Random.Range(-100000f, 100000f);
-
-        float offSetX3 = Random.Range(-100000f, 100000f);
-        float offSetZ3 = Random.Range(-100000f, 100000f);
-
-        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(m_XSize/10, m_ZSize/10, new Vector3(m_XSize, 64, m_ZSize),
-            (kX, kZ) => Mathf.PerlinNoise((kX * 0.001f * m_XSize) + offSetX, (kZ * 0.001f * m_ZSize) + offSetZ) * 1.25f +
+        m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(m_XSize, m_ZSize, new Vector3(m_XSize, 64, m_ZSize),
+            (kX, kZ) => MyNoise.noiseMap(kX*(m_XSize/500)+offSetX,kZ*(m_ZSize/500)+offSetZ));/*Mathf.PerlinNoise((kX * 0.001f * m_XSize) + offSetX, (kZ * 0.001f * m_ZSize) + offSetZ) * 1.25f +
                         Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX2, (kZ * 0.0004f * m_ZSize) + offSetZ2) * 6f +
                         Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX3, (kZ * 0.0004f * m_ZSize) + offSetZ3) * 6f
             ) ;
 
+            500 est la taille du bruit de base on veut garder cette taille
+*/
 
         gameObject.AddComponent<MeshCollider>();
     }
