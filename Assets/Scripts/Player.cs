@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyMathTools;
 
 public class Player : MonoBehaviour
 {
@@ -9,10 +10,17 @@ public class Player : MonoBehaviour
     //public float m_RotationSpeed;
 
     Rigidbody m_Rb;
+
+    public Vector2 turn;
+    public float sensitivity = 10f;
+    public float speed = 1;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void Awake(){
@@ -22,8 +30,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
+        //transform.localRotation = Quaternion.Euler(0, turn.x, 0);
         // transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
-        // transform.rotation = Quaternion.AngleAxis(hInput*Time.deltaTime*m_RotationSpeed,Vector3.up) * transform.rotation;
+        //transform.localRotation = Quaternion.AngleAxis(turn.x * Time.deltaTime*sensitivity,Vector3.up) * transform.rotation;
     }
 
     private void FixedUpdate(){
@@ -32,7 +44,7 @@ public class Player : MonoBehaviour
 
         // Vector3 moveVect = transform.forward * vInput * Time.fixedDeltaTime * m_TranslationSpeed;
         // m_Rb.MovePosition(m_Rb.position+moveVect);
-        // m_Rb.MoveRotation(Quaternion.AngleAxis(hInput*Time.fixedDeltaTime*m_RotationSpeed,Vector3.up) * transform.rotation);
+        m_Rb.MoveRotation(Quaternion.AngleAxis(turn.x*Time.fixedDeltaTime*sensitivity,Vector3.up) * transform.rotation);
 
         // m_Rb.angularVelocity = Vector3.zero;
 

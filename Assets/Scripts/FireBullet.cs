@@ -18,7 +18,7 @@ public class FireBullet : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameObject prefabcopy = Instantiate(Bullet, transform.position, Quaternion.identity) as GameObject;
-            prefabcopy.GetComponent<Rigidbody>().AddForce(transform.forward * 1500);
+            prefabcopy.GetComponent<Rigidbody>().AddForce(transform.up * 1500);
             Destroy(prefabcopy, 1.0f);
         }
 
