@@ -16,9 +16,12 @@ public class RotateHead : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime;
 
-        transform.localRotation = Quaternion.Euler(-turn.y, 0, 0);
+        if(-turn.y<90 && -turn.y > -75)
+        {
+            transform.localRotation = Quaternion.AngleAxis(-turn.y, Vector3.right);
+        }
     }
 }
