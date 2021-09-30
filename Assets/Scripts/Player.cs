@@ -6,8 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public float m_TranslationSpeed;
-    public float m_RotationSpeed;
-    public GameObject Bullet;
+    //public float m_RotationSpeed;
 
     Rigidbody m_Rb;
     // Start is called before the first frame update
@@ -23,7 +22,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
         // transform.rotation = Quaternion.AngleAxis(hInput*Time.deltaTime*m_RotationSpeed,Vector3.up) * transform.rotation;
     }
@@ -44,15 +42,8 @@ public class Player : MonoBehaviour
             m_Rb.AddForce(velocityDelta,ForceMode.VelocityChange);
             m_Rb.AddForce(Vector3.down, ForceMode.Force);
 
-            Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
-            m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            GameObject prefabcopy = Instantiate(Bullet, transform.position, Quaternion.identity) as GameObject;
-            prefabcopy.GetComponent<Rigidbody>().AddForce(transform.forward * 1500);
-            Destroy(prefabcopy, 1.0f);
+            //Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
+            //m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
         }
     }
 
