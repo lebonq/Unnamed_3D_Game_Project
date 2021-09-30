@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Herbe
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Ground
+  m_Shader: {fileID: 4800000, guid: 9cb502b7e460bbf4f930fa0506bdd467, type: 3}
   m_ShaderKeywords: _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,6 +39,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 75, y: 75}
         m_Offset: {x: 0, y: 0}
+    - _FloorTex:
+        m_Texture: {fileID: 2800000, guid: f76027295c760db49949823d049c1e22, type: 3}
+        m_Scale: {x: 75, y: 75}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: ae29e7059300edd4f99fee0aeb7b72c8, type: 3}
         m_Scale: {x: 75, y: 75}
@@ -58,6 +62,10 @@ Material:
     - _TerrainHolesTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WallTex:
+        m_Texture: {fileID: 2800000, guid: b0360298a5e230e4b8b9419fe295c497, type: 3}
+        m_Scale: {x: 75, y: 75}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
