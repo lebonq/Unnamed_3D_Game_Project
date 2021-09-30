@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
         if(vInput != 0 || hInput != 0){
             Vector3 velocityDelta = transform.forward * m_TranslationSpeed * vInput - m_Rb.velocity;
             m_Rb.AddForce(velocityDelta,ForceMode.VelocityChange);
+            m_Rb.AddForce(Vector3.down, ForceMode.Force);
 
             Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
             m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
