@@ -18,11 +18,12 @@ Shader "Custom/TextureDependingNormal"
  
         struct Input {
             float3 worldNormal;
-            float3 worldPosition;
+            float3 worldPos;
             float2 uv_FloorTex;
             float2 uv_WallTex;
             float2 uv_FloorMidHeightTex;
             float2 uv_FloorSnow;
+            
         };
  
         sampler2D _FloorTex;
@@ -32,25 +33,15 @@ Shader "Custom/TextureDependingNormal"
  
         void surf(Input IN, inout SurfaceOutputStandard o) {
             
-            float3 vFloor;
-            float3 vWall;
+            float h = IN.worldPos.y;
 
-            float2 uv = IN.uv_FloorTex;
-
-            if(IN.worldPosition.y < 100)vFloor = tex2D(_FloorTex, uv).rgb;
-            if(IN.worldPosition.y > 100)vFloor = tex2D(_FloorMidHeightTex, uv).rgb;
-            //vFloor = tex2D(_FloorSnow, uv).rgb;
-
-            vWall = tex2D(_WallTex, uv).rgb;
-
-            if(IN.worldNormal.y < 0.81 && IN.worldNormal.y > 0.79){
-                o.Albedo = lerp(vFloor, vWall, uv.x);
-            }
-            else if (IN.worldNormal.y < 0.79){
-                o.Albedo = vWall;
+            if (IN.worldNormal.y > 0.70){
+                if(h < 400) o.Albedo = tex2D(_FloorTex, IN.uv_FloorTex).rgb;
+                if(h > 400 && h < 500) o.Albedo = tex2D(_FloorMidHeightTex, IN.uv_FloorMidHeightTex).rgb;
+                if(h > 500) o.Albedo = tex2D(_FloorSnow, IN.uv_FloorSnow).rgb;
             }
             else{
-                o.Albedo = vFloor;
+                o.Albedo = tex2D(_WallTex, IN.uv_WallTex).rgb;
             }
             
             o.Emission = half3(0, 0, 0) * o.Albedo;
