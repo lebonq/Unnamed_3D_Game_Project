@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _FloorSnow:
         m_Texture: {fileID: 2800000, guid: 3fcb3c17b7d5fe34f8c0960bd06c8ce3, type: 3}
-        m_Scale: {x: 40, y: 40}
+        m_Scale: {x: 400, y: 400}
         m_Offset: {x: 0, y: 0}
     - _FloorTex:
         m_Texture: {fileID: 2800000, guid: f76027295c760db49949823d049c1e22, type: 3}
@@ -81,7 +81,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _WallTex:
         m_Texture: {fileID: 2800000, guid: b0360298a5e230e4b8b9419fe295c497, type: 3}
-        m_Scale: {x: 75, y: 75}
+        m_Scale: {x: 100, y: 100}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
@@ -92,7 +92,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HeightMax: 400
+    - _HeightMax: 640
     - _HeightMin: 0
     - _Metallic: 1
     - _Mode: 0
