@@ -20,6 +20,19 @@ public class Player : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Vector3[] vert = GameObject.Find("Terrain").GetComponent<MeshFilter>().sharedMesh.vertices;
+        Vector3 newPos = transform.position;
+
+        for(int i = 0; i < vert.Length; i++)
+        {
+            if((vert[i].x - newPos.x) * (vert[i].x - newPos.x) + (vert[i].z - newPos.z)* (vert[i].z - newPos.z) < 20)
+            {
+                newPos.y = vert[i].y + 10;
+                break;
+            }
+        }
+        transform.position = newPos;
+            
 
     }
 

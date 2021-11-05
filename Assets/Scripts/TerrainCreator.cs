@@ -10,7 +10,7 @@ public class TerrainCreator : MonoBehaviour
     delegate float ComputeValueDelegate(float kX, float kZ);
     delegate Vector3 ComputeVertexPos(float k1, float k2);
 
-    MeshFilter m_Mf;
+    public MeshFilter m_Mf;
     [SerializeField] int m_XSize;
     [SerializeField] int m_ZSize;
 
