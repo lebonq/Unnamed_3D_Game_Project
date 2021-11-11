@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 using UnityEngine;
+using MapNoise;
 using MyMathTools;
 
 static class CubeToSphere
@@ -55,8 +56,10 @@ public class PlanetGenerator : MonoBehaviour
     {
         m_MeshFilter = GetComponent<MeshFilter>();
 
+        float offSetX = UnityEngine.Random.Range(-200, 200);
+        float offSetZ = UnityEngine.Random.Range(-200, 200);
 
-        ComputeValueDelegate heightFunction = (kX, kZ) => m_HeightMap.GetPixel((int)(kX * m_HeightMap.width), (int)(kZ * m_HeightMap.height)).grayscale;
+        ComputeValueDelegate heightFunction = (kX, kZ) => MyNoise.noiseMap(kX+offSetX,kZ+offSetZ)*2;
         m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius, 0.03f, heightFunction);
     }
 

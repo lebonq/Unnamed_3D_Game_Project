@@ -17,9 +17,5 @@ namespace MapNoise
             float d = 2 * Mathf.Max(Mathf.Abs((x/10)-0.5f),Mathf.Abs((z/10)-0.5f));
             return (Mathf.Pow(e,3f) - d + 1)/2;
         }
-        public static float rigidNose(float x, float z){
-            return 2 * (0.5f - Mathf.Abs(0.5f - Mathf.PerlinNoise(x,z)));
-        }
-
     }
 }

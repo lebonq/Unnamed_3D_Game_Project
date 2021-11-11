@@ -23,7 +23,7 @@ public class TerrainCreator : MonoBehaviour
 
         m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(m_XSize, m_ZSize, new Vector3(m_XSize, 64, m_ZSize),
             (kX, kZ) => MyNoise.noiseMap(kX*(m_XSize/500)+offSetX,kZ*(m_ZSize/500)+offSetZ));
-            
+
         gameObject.AddComponent<MeshCollider>();
     }
 
@@ -40,7 +40,7 @@ public class TerrainCreator : MonoBehaviour
     Mesh GeneratePlane(int nSegmentsX, int nSegmentsZ, ComputeVertexPos posFunction)
     {
         Mesh mesh = new Mesh();
-        mesh.name = "3DWrappedPlaneObject";
+        mesh.name = "Terrain";
 
         mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 
