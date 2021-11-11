@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500c19f03b26bee478a3ccced5c939df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TranslationSpeed: 7
+  m_TranslationSpeed: 0
   turn: {x: 0, y: 0}
   sensitivity: 10
   speed: 1
@@ -330,11 +330,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187852189}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.019991457, z: 0.099998474}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 2019371928}
-  m_RootOrder: 0
+  m_Father: {fileID: 1394734500}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &1187852191
 CapsuleCollider:
@@ -542,6 +542,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2019371928}
+  - {fileID: 1187852190}
   m_Father: {fileID: 103188473}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -615,7 +616,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394734499}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7d2d5f12945d5a45be1399149a4f965, type: 3}
   m_Name: 
@@ -727,8 +728,6 @@ GameObject:
   - component: {fileID: 2019371928}
   - component: {fileID: 2019371927}
   - component: {fileID: 2019371926}
-  - component: {fileID: 2019371925}
-  - component: {fileID: 2019371929}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -736,32 +735,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2019371925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019371924}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2406146b404148668c5d982c0e93e3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StartRho: 8
-  m_StartThetaDeg: 45
-  m_StartPhiDeg: 45
-  m_RhoMin: 2
-  m_RhoMax: 20
-  m_PhiMinDeg: 1
-  m_PhiMaxDeg: 179
-  m_RhoSpeed: -0.1
-  m_ThetaSpeed: -0.01
-  m_PhiSpeed: -0.01
-  m_RhoLerpSpeed: 4
-  m_ThetaLerpSpeed: 4
-  m_PhiLerpSpeed: 4
-  m_Target: {fileID: 103188473}
 --- !u!81 &2019371926
 AudioListener:
   m_ObjectHideFlags: 0
@@ -821,25 +794,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019371924}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01999146, z: 0.09999847}
+  m_LocalPosition: {x: 0, y: 0.019991457, z: 0.099998474}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1187852190}
+  m_Children: []
   m_Father: {fileID: 1394734500}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2019371929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019371924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d2d5f12945d5a45be1399149a4f965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turn: {x: 0, y: 0}
-  sensitivity: 100
-  speed: 1

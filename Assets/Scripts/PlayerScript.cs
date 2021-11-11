@@ -38,6 +38,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake(){
         m_Rb = GetComponent<Rigidbody>();
+        // m_Rb.freezerotation = true;
     }
 
     // Update is called once per frame
@@ -49,12 +50,6 @@ public class PlayerScript : MonoBehaviour
         //transform.localRotation = Quaternion.Euler(0, turn.x, 0);
         // transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
         //transform.localRotation = Quaternion.AngleAxis(turn.x * Time.deltaTime*sensitivity,Vector3.up) * transform.rotation;
-    }
-
-    public void turn_that_way( float x, float y)
-    {
-        turn.x += x;
-        turn.y += y;
     }
 
     private void FixedUpdate(){
