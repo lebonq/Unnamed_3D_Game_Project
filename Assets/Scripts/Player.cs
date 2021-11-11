@@ -42,16 +42,23 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {/*
         turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;*/
 
         //transform.localRotation = Quaternion.Euler(0, turn.x, 0);
         // transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
         //transform.localRotation = Quaternion.AngleAxis(turn.x * Time.deltaTime*sensitivity,Vector3.up) * transform.rotation;
     }
 
+    public void turn_that_way( float x, float y)
+    {
+        turn.x += x;
+        turn.y += y;
+    }
+
     private void FixedUpdate(){
+        
         float vInput = Input.GetAxis("Vertical");
         float hInput = Input.GetAxis("Horizontal");
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateHead : MonoBehaviour
 {
     public Vector2 turn;
-    public float sensitivity = 10f;
+    public float sensitivity = 100f;
     public float speed = 1;
 
     // Start is called before the first frame update
@@ -23,5 +23,9 @@ public class RotateHead : MonoBehaviour
         {
             transform.localRotation = Quaternion.AngleAxis(-turn.y, Vector3.right);
         }
+
+        transform.localRotation = Quaternion.AngleAxis(turn.x, Vector3.up);
+
+        GetComponent<Player>().turn_that_way(turn.x, turn.y);
     }
 }
