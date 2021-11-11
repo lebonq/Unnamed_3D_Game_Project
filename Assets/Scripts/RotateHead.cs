@@ -23,9 +23,5 @@ public class RotateHead : MonoBehaviour
         {
             transform.localRotation = Quaternion.AngleAxis(-turn.y, Vector3.right);
         }
-
-        transform.localRotation = Quaternion.AngleAxis(turn.x, Vector3.up);
-
-        GetComponent<Player>().turn_that_way(turn.x, turn.y);
     }
 }
