@@ -22,14 +22,8 @@ public class TerrainCreator : MonoBehaviour
         float offSetZ = Random.Range(-200, 200);
 
         m_Mf.sharedMesh = GenerateTerrainFromHeightFunction(m_XSize, m_ZSize, new Vector3(m_XSize, 64, m_ZSize),
-            (kX, kZ) => MyNoise.noiseMap(kX*(m_XSize/500)+offSetX,kZ*(m_ZSize/500)+offSetZ));/*Mathf.PerlinNoise((kX * 0.001f * m_XSize) + offSetX, (kZ * 0.001f * m_ZSize) + offSetZ) * 1.25f +
-                        Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX2, (kZ * 0.0004f * m_ZSize) + offSetZ2) * 6f +
-                        Mathf.PerlinNoise((kX * 0.0004f * m_XSize) + offSetX3, (kZ * 0.0004f * m_ZSize) + offSetZ3) * 6f
-            ) ;
-
-            500 est la taille du bruit de base on veut garder cette taille
-*/
-
+            (kX, kZ) => MyNoise.noiseMap(kX*(m_XSize/500)+offSetX,kZ*(m_ZSize/500)+offSetZ));
+            
         gameObject.AddComponent<MeshCollider>();
     }
 
