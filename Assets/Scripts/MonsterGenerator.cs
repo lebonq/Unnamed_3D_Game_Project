@@ -40,7 +40,7 @@ static class CubeToSphere
 };
 
 [RequireComponent(typeof(MeshFilter))]
-public class PlanetGenerator : MonoBehaviour
+public class MonsterGenerator : MonoBehaviour
 {
     delegate float ComputeValueDelegate(float kx, float kz);
     delegate Vector3 ComputeVectorDelegate(float kx, float kz);
