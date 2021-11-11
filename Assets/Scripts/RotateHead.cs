@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateHead : MonoBehaviour
 {
     public Vector2 turn;
-    public float sensitivity = 5f;
+    public float sensitivity = 100f;
     public float speed = 1;
 
     // Start is called before the first frame update

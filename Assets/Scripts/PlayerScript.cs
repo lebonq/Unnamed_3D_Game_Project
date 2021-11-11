@@ -6,13 +6,14 @@ using MyMathTools;
 public class PlayerScript : MonoBehaviour
 {
 
+    public float m_TranslationSpeed;
+    //public float m_RotationSpeed;
+
     Rigidbody m_Rb;
 
-    public float horizontalmove;
-    public float verticalmove;
-    Vector3 movedirection;
-    public float speed = 6f;
-    float speedmultiplier = 10f;
+    public Vector2 turn;
+    public float sensitivity = 10f;
+    public float speed = 1;
 
 
     // Start is called before the first frame update
@@ -37,33 +38,45 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake(){
         m_Rb = GetComponent<Rigidbody>();
-        m_Rb.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MyInput();
+        turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
+        //transform.localRotation = Quaternion.Euler(0, turn.x, 0);
+        // transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
+        //transform.localRotation = Quaternion.AngleAxis(turn.x * Time.deltaTime*sensitivity,Vector3.up) * transform.rotation;
     }
 
-    void MyInput()
+    public void turn_that_way( float x, float y)
     {
-        horizontalmove = Input.GetAxisRaw("Horizontal");
-        verticalmove = Input.GetAxisRaw("Vertical");
-
-        movedirection = transform.forward * verticalmove + transform.right * horizontalmove;
+        turn.x += x;
+        turn.y += y;
     }
-
 
     private void FixedUpdate(){
+        
+        float vInput = Input.GetAxis("Vertical");
+        float hInput = Input.GetAxis("Horizontal");
 
-        MovePlayer();
-    }
+        // Vector3 moveVect = transform.forward * vInput * Time.fixedDeltaTime * m_TranslationSpeed;
+        // m_Rb.MovePosition(m_Rb.position+moveVect);
+        m_Rb.MoveRotation(Quaternion.AngleAxis(turn.x*Time.fixedDeltaTime*sensitivity,Vector3.up) * transform.rotation);
 
-    void MovePlayer()
-    {
-        Vector3 velocityDelta = movedirection.normalized * speed - m_Rb.velocity;
-        m_Rb.AddForce(velocityDelta * speedmultiplier, ForceMode.VelocityChange);
+        // m_Rb.angularVelocity = Vector3.zero;
+
+        // Use add force method to change de velocity
+        if(vInput != 0 || hInput != 0){
+            Vector3 velocityDelta = transform.forward * m_TranslationSpeed * vInput - m_Rb.velocity;
+            m_Rb.AddForce(velocityDelta,ForceMode.VelocityChange);
+            m_Rb.AddForce(Vector3.down, ForceMode.Force);
+
+            //Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
+            //m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
+        }
     }
 
     private void OnCollisionEnter(Collision collision){
