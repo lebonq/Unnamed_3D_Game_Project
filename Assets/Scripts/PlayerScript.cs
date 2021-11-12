@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
         {
             if ((vert[i].x - newPos.x) * (vert[i].x - newPos.x) + (vert[i].z - newPos.z) * (vert[i].z - newPos.z) < 20)
             {
-                newPos.y = vert[i].y + 3;
+                newPos.y = vert[i].y + 5;
                 break;
             }
         }
