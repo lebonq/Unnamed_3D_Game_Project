@@ -15,31 +15,37 @@ public class PlayerScript : MonoBehaviour
     public float sensitivity = 10f;
     public float speed = 1;
 
+    float vInput;
+    float hInput;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
         Vector3[] vert = GameObject.Find("Terrain").GetComponent<MeshFilter>().sharedMesh.vertices;
         Vector3 newPos = transform.position;
-
-        for(int i = 0; i < vert.Length; i++)
+        for (int i = 0; i < vert.Length; i++)
         {
-            if((vert[i].x - newPos.x) * (vert[i].x - newPos.x) + (vert[i].z - newPos.z)* (vert[i].z - newPos.z) < 20)
+            if ((vert[i].x - newPos.x) * (vert[i].x - newPos.x) + (vert[i].z - newPos.z) * (vert[i].z - newPos.z) < 20)
             {
-                newPos.y = vert[i].y + 10;
+                newPos.y = vert[i].y + 3;
                 break;
             }
         }
         transform.position = newPos;
-            
-
     }
 
-    private void Awake(){
+
+
+    private void Awake()
+    {
         m_Rb = GetComponent<Rigidbody>();
-        // m_Rb.freezerotation = true;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -47,6 +53,9 @@ public class PlayerScript : MonoBehaviour
         turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
+
+        vInput = Input.GetAxis("Vertical");
+        hInput = Input.GetAxis("Horizontal");
         //transform.localRotation = Quaternion.Euler(0, turn.x, 0);
         // transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
         //transform.localRotation = Quaternion.AngleAxis(turn.x * Time.deltaTime*sensitivity,Vector3.up) * transform.rotation;
@@ -54,8 +63,6 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate(){
         
-        float vInput = Input.GetAxis("Vertical");
-        float hInput = Input.GetAxis("Horizontal");
 
         // Vector3 moveVect = transform.forward * vInput * Time.fixedDeltaTime * m_TranslationSpeed;
         // m_Rb.MovePosition(m_Rb.position+moveVect);
