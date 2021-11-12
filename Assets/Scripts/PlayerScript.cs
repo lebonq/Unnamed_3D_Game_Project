@@ -13,7 +13,6 @@ public class PlayerScript : MonoBehaviour
 
     public Vector2 turn;
     public float sensitivity = 10f;
-    public float speed = 1;
 
     float vInput;
     float hInput;
@@ -50,8 +49,8 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime;
 
 
         vInput = Input.GetAxis("Vertical");
@@ -66,7 +65,7 @@ public class PlayerScript : MonoBehaviour
 
         // Vector3 moveVect = transform.forward * vInput * Time.fixedDeltaTime * m_TranslationSpeed;
         // m_Rb.MovePosition(m_Rb.position+moveVect);
-        m_Rb.MoveRotation(Quaternion.AngleAxis(turn.x*Time.fixedDeltaTime*sensitivity,Vector3.up) * transform.rotation);
+        m_Rb.MoveRotation(Quaternion.AngleAxis(turn.x,Vector3.up) * transform.rotation);
 
         // m_Rb.angularVelocity = Vector3.zero;
 
