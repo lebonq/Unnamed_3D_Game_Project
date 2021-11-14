@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour
 {
 
-    public float maxTime = 500;
+    public float maxTime = 120;
     float timeLeft;
     // Start is called before the first frame update
 

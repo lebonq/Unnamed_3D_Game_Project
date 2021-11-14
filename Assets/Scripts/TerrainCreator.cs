@@ -39,10 +39,10 @@ public class TerrainCreator : MonoBehaviour
         vert = m_Mf.sharedMesh.vertices;
 
         TreeCollector = new GameObject("TreeCollector");
-        //place_trees();
+        place_trees();
 
         MonsterCollector = new GameObject("MonsterCollector");
-        //place_monsters();
+        place_monsters();
 
     }
 
@@ -225,7 +225,7 @@ public class TerrainCreator : MonoBehaviour
 
     void place_monsters()
     {
-        float nb_monsters = Random.Range(50, 150); // nombre de monstres
+        float nb_monsters = Random.Range(40, 60); // nombre de monstres
 
         for (int mobs = 0; mobs < nb_monsters; mobs++)
         {
