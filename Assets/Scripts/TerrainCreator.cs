@@ -122,8 +122,9 @@ public class TerrainCreator : MonoBehaviour
 
         for (int tree = 0; tree < nb_trees; tree++)
         {
-            float posx_tree = Random.Range(0, 2000);
-            float posz_tree = Random.Range(0, 2000);
+            
+            float posx_tree = Random.Range(m_Mf.sharedMesh.bounds.min.x + 50, m_Mf.sharedMesh.bounds.max.x - 50);
+            float posz_tree = Random.Range(m_Mf.sharedMesh.bounds.min.z + 50, m_Mf.sharedMesh.bounds.max.z - 50);
 
             Vector3 newPos = new Vector3(0,0,0);
             newPos.x = posx_tree;
