@@ -101,6 +101,10 @@ public class PlayerScript : MonoBehaviour
         return dead;
     }
 
+    public void setDead(){
+        dead = true;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
 
