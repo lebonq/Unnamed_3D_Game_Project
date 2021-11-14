@@ -60,6 +60,8 @@ public class MonsterGenerator : MonoBehaviour
 
         ComputeValueDelegate heightFunction = (kX, kZ) => MyNoise.noiseMap(kX+offSetX,kZ+offSetZ)*2;
         m_MeshFilter.sharedMesh = PlainSpherifiedCube(m_SpherifiedCubeNDivisions, m_SpherifiedCubeRadius, 0.03f, heightFunction);
+
+        gameObject.AddComponent<MeshCollider>();
     }
 
     Vector3 Mult(Vector3 a, Vector3 b)
