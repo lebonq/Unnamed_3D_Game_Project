@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpherifiedCubeNDivisions: 100
-  m_SpherifiedCubeRadius: 20
+  m_SpherifiedCubeRadius: 5
 --- !u!64 &7161337099091835305
 MeshCollider:
   m_ObjectHideFlags: 0
