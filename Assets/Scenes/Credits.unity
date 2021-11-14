@@ -155,10 +155,10 @@ RectTransform:
   m_Father: {fileID: 2142894893}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076294, y: -106}
-  m_SizeDelta: {x: 116.1558, y: 59.2916}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0.0000076294, y: 192}
+  m_SizeDelta: {x: 246.021, y: 124.2242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &162470081
 MonoBehaviour:
@@ -229,8 +229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5}
+  m_SizeDelta: {x: 0, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &284794741
 MonoBehaviour:
@@ -252,12 +252,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Terrain and monsters generation : Quentin Lebon\n\nTextures : Quentin
+  m_text: "\nTerrain and monsters generation : Quentin Lebon\n\nTextures : Quentin
     Lebon\n\nTree generation : Aleaume Landr\xE9a\n\nPlayer design: Aleaume Landr\xE9a\n\nPlayer
-    and camera movements : Quentin Lebon & Aleaume Landr\xE9a\n\nInterface, Menu
-    & screens : Aleaume Landr\xE9a\n\nInteractions & collisions : Quentin Lebon &
-    Aleaume Landr\xE9a\n\nMonster Audio : Aleaume Landr\xE9a\n\n\n\n\n\n(Other sources
-    than us are described in ReleaseNotes.txt)\n(Use any key to go back to the Menu)"
+    and camera movements : Quentin Lebon & Aleaume Landr\xE9a\n\nMonster Movements
+    : Quentin Lebon\n\nInterface, Menu & screens : Aleaume Landr\xE9a\n\nEntity interactions
+    & collisions : Quentin Lebon & Aleaume Landr\xE9a\n\nAudio : Aleaume Landr\xE9a\n\n\n\n\n\n\n\n(Other
+    sources than us are described in ReleaseNotes.txt)\n(Use any key to go back to
+    the Menu)\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -284,10 +285,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 18
+  m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -645,7 +646,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 844.9248
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
