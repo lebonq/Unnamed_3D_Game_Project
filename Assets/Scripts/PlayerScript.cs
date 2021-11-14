@@ -91,9 +91,12 @@ public class PlayerScript : MonoBehaviour
         // Use add force method to change de velocity
         if (vInput != 0 || hInput != 0)
         {
-            Vector3 velocityDelta = GetComponentInChildren<Transform>().forward * m_TranslationSpeed * vInput - m_Rb.velocity;
-            m_Rb.AddForce(velocityDelta, ForceMode.VelocityChange);
+            Vector3 velocityDelta = (GetComponentInChildren<Transform>().forward * m_TranslationSpeed * vInput ) + (GetComponentInChildren<Transform>().right * m_TranslationSpeed * hInput);
+            //On ajoute la gravité
+            m_Rb.AddForce(velocityDelta - m_Rb.velocity, ForceMode.Impulse);
         }
+
+
     }
 
     public bool isDead()
