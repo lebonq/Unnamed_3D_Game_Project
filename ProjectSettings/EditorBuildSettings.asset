@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/notNow.unity
     guid: 84ccec16588cfc141a27abeb30e4a493
+  - enabled: 1
+    path: Assets/Scenes/WinSurvival.unity
+    guid: d6c1dc00d1ef3e04d834f7a6a8a52e25
+  - enabled: 1
+    path: Assets/Scenes/LossDeath.unity
+    guid: 17c316b7570387849b62b89681f8be0e
   m_configObjects: {}

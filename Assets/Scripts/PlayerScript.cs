@@ -18,6 +18,9 @@ public class PlayerScript : MonoBehaviour
     public float sensitivityX = 4f;
     Quaternion originalRotation;
 
+    bool dead = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +94,11 @@ public class PlayerScript : MonoBehaviour
             Vector3 velocityDelta = GetComponentInChildren<Transform>().forward * m_TranslationSpeed * vInput - m_Rb.velocity;
             m_Rb.AddForce(velocityDelta, ForceMode.VelocityChange);
         }
+    }
+
+    public bool isDead()
+    {
+        return dead;
     }
 
     private void OnCollisionEnter(Collision collision)
