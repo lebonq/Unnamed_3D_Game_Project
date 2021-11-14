@@ -17,7 +17,7 @@ public class TerrainCreator : MonoBehaviour
     public GameObject trunkPart;
     public GameObject leaves;
 
-    public GameObject TreeGatherer; // là où placer tt les instances creees
+    public GameObject TreeCollector; // là où placer tt les instances creees
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class TerrainCreator : MonoBehaviour
 
         gameObject.AddComponent<MeshCollider>();
 
-        TreeGatherer = new GameObject("TreeGatherer");
+        TreeCollector = new GameObject("TreeCollector");
         place_trees();
     }
 
@@ -203,7 +203,7 @@ public class TerrainCreator : MonoBehaviour
         position_actual.z = position_precedent.z + Random.Range(-4, 4);// position random par rapport au précédent, mais proche et toujours plus haut
 
         GameObject prefabtrunk = Instantiate(trunkPart, position_actual, Quaternion.identity) as GameObject;
-        prefabtrunk.transform.parent = TreeGatherer.transform; // cree le nouveau trunk
+        prefabtrunk.transform.parent = TreeCollector.transform; // cree le nouveau trunk
 
         return position_actual;
     }
@@ -211,7 +211,7 @@ public class TerrainCreator : MonoBehaviour
     void place_leaves_block(Vector3 position) // to place leaves at the end
     {
         GameObject prefableaves = Instantiate(leaves, position, Quaternion.identity) as GameObject; // leaves on top
-        prefableaves.transform.parent = TreeGatherer.transform; // place leaves on top
+        prefableaves.transform.parent = TreeCollector.transform; // place leaves on top
     }
 
     Vector3 place_branch_block(Vector3 position_precedent, int x_factor, int z_factor) // to place blocks on the tree branch
@@ -222,7 +222,7 @@ public class TerrainCreator : MonoBehaviour
         position_actual.z = position_precedent.z + Random.Range(0, 4) * z_factor;// position random par rapport au précédent, mais proche et toujours plus haut, et toujours meme direction
 
         GameObject prefabtrunk = Instantiate(trunkPart, position_actual, Quaternion.identity) as GameObject;
-        prefabtrunk.transform.parent = TreeGatherer.transform; // cree le nouveau trunk
+        prefabtrunk.transform.parent = TreeCollector.transform; // cree le nouveau trunk
 
         return position_actual;
     }
