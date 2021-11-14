@@ -127,7 +127,7 @@ public class TerrainCreator : MonoBehaviour
 
     void place_trees()
     {
-        float nb_trees = Random.Range(50, 150); // nombre d'arbres
+        float nb_trees = Random.Range(20, 100); // nombre d'arbres
 
         for (int tree = 0; tree < nb_trees; tree++)
         {

@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8206c1a676dcf7b4ba147294f361d8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpherifiedCubeNDivisions: 350
+  m_SpherifiedCubeNDivisions: 100
   m_SpherifiedCubeRadius: 20
 --- !u!64 &7161337099091835305
 MeshCollider:
