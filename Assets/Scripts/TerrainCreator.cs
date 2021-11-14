@@ -16,8 +16,13 @@ public class TerrainCreator : MonoBehaviour
 
     public GameObject trunkPart;
     public GameObject leaves;
+    public GameObject Monster;
 
-    public GameObject TreeCollector; // là où placer tt les instances creees
+
+    GameObject TreeCollector; // là où placer tt les instances creees
+    GameObject MonsterCollector;
+
+    Vector3[] vert;
 
     private void Awake()
     {
@@ -31,8 +36,14 @@ public class TerrainCreator : MonoBehaviour
 
         gameObject.AddComponent<MeshCollider>();
 
+        vert = m_Mf.sharedMesh.vertices;
+
         TreeCollector = new GameObject("TreeCollector");
         place_trees();
+
+        MonsterCollector = new GameObject("MonsterCollector");
+        place_monsters();
+
     }
 
     Mesh GenerateTerrainFromHeightFunction(int nSegmentsX, int nSegmentsZ, Vector3 size, ComputeValueDelegate heightFunc)
@@ -118,35 +129,19 @@ public class TerrainCreator : MonoBehaviour
     {
         float nb_trees = Random.Range(50, 150); // nombre d'arbres
 
-        Vector3[] vert = m_Mf.sharedMesh.vertices;
-
         for (int tree = 0; tree < nb_trees; tree++)
         {
             
             float posx_tree = Random.Range(m_Mf.sharedMesh.bounds.min.x + 50, m_Mf.sharedMesh.bounds.max.x - 50);
-            float posz_tree = Random.Range(m_Mf.sharedMesh.bounds.min.z + 50, m_Mf.sharedMesh.bounds.max.z - 50);
+            float posz_tree = Random.Range(m_Mf.sharedMesh.bounds.min.z + 50, m_Mf.sharedMesh.bounds.max.z - 50); // position random
 
             Vector3 newPos = new Vector3(0,0,0);
             newPos.x = posx_tree;
             newPos.z = posz_tree;
 
-            float minidist = Mathf.Infinity; // la distance minimum
-            int idx_min = 0; // l'index min correspondant
+            int idx_min = idx_dist_min(newPos); // l'index min correspondant
 
-            for(int v = 0; v < vert.Length; v++) { // calcul des distances
-                float newdist = calc_distance(new Vector3(posx_tree, 0, posz_tree), vert[v]);
-
-                if (newdist < minidist)
-                {
-                    minidist = newdist;
-                    idx_min = v;
-                }
-
-            } // ici on a la distance a la vertex min et son index
-
-            Vector3 v_min = vert[idx_min]; // la vertex la plus proche
-
-            newPos.y = v_min.y - 10;
+            newPos.y = vert[idx_min].y - 10;
 
             create_tree(newPos);
         }
@@ -226,5 +221,49 @@ public class TerrainCreator : MonoBehaviour
         prefabtrunk.transform.parent = TreeCollector.transform; // cree le nouveau trunk
 
         return position_actual;
+    }
+
+    void place_monsters()
+    {
+        float nb_monsters = Random.Range(50, 150); // nombre de monstres
+
+        for (int mobs = 0; mobs < nb_monsters; mobs++)
+        {
+            Vector3 newPosMob = new Vector3(0, 0, 0);
+
+            float posx_mob = Random.Range(m_Mf.sharedMesh.bounds.min.x + 50, m_Mf.sharedMesh.bounds.max.x - 50);
+            float posz_mob = Random.Range(m_Mf.sharedMesh.bounds.min.z + 50, m_Mf.sharedMesh.bounds.max.z - 50); // position random
+
+            newPosMob.x = posx_mob;
+            newPosMob.z = posz_mob;
+
+            int idx_min = idx_dist_min(newPosMob); // l'index min correspondant
+
+            newPosMob.y = vert[idx_min].y + 5;
+
+
+            GameObject prefabmonster = Instantiate(Monster, newPosMob, Quaternion.identity) as GameObject;
+            prefabmonster.transform.parent = MonsterCollector.transform; // cree le monstre et stock le
+        }
+    }
+
+    int idx_dist_min(Vector3 pos_object)
+    {
+        Vector3[] vert = m_Mf.sharedMesh.vertices;
+        float minidist = Mathf.Infinity; // la distance minimum
+        int idx_min = 0; // l'index min correspondant
+
+        for (int v = 0; v < vert.Length; v++)
+        { // calcul des distances
+            float newdist = calc_distance(new Vector3(pos_object.x, 0, pos_object.z), vert[v]);
+
+            if (newdist < minidist)
+            {
+                minidist = newdist;
+                idx_min = v;
+            }
+
+        } // ici on a la distance a la vertex min et son index
+        return idx_min;
     }
 }
