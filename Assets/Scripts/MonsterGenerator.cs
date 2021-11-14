@@ -50,7 +50,6 @@ public class MonsterGenerator : MonoBehaviour
 
     [SerializeField] int m_SpherifiedCubeNDivisions;
     [SerializeField] int m_SpherifiedCubeRadius;
-    [SerializeField] Texture2D m_HeightMap;
 
     private void Awake()
     {
