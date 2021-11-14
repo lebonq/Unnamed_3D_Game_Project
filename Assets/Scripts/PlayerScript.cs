@@ -28,15 +28,28 @@ public class PlayerScript : MonoBehaviour
 
         Vector3[] vert = GameObject.Find("Terrain").GetComponent<MeshFilter>().sharedMesh.vertices;
         Vector3 newPos = transform.position;
-        for (int i = 0; i < vert.Length; i++)
-        {
-            if ((vert[i].x - newPos.x) * (vert[i].x - newPos.x) + (vert[i].z - newPos.z) * (vert[i].z - newPos.z) < 20)
+
+        float minidist = Mathf.Infinity; // la distance minimum
+        int idx_min = 0; // l'index min correspondant
+
+        for (int v = 0; v < vert.Length; v++)
+        { // calcul des distances
+            float newdist = calc_distance(new Vector3(newPos.x, 0, newPos.z), vert[v]);
+
+            if (newdist < minidist)
             {
-                newPos.y = vert[i].y + 5;
-                break;
+                minidist = newdist;
+                idx_min = v;
             }
-        }
+
+        } // ici on a la distance a la vertex min et son index
+        newPos.y = vert[idx_min].y + 10;
         transform.position = newPos;
+    }
+
+    float calc_distance(Vector3 a, Vector3 b)
+    {
+        return Mathf.Sqrt(Mathf.Pow(a.x - b.x, 2) + Mathf.Pow(a.z - b.z, 2));
     }
 
     private void Awake()

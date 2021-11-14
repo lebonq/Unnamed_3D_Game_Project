@@ -239,7 +239,7 @@ public class TerrainCreator : MonoBehaviour
 
             int idx_min = idx_dist_min(newPosMob); // l'index min correspondant
 
-            newPosMob.y = vert[idx_min].y + 5;
+            newPosMob.y = vert[idx_min].y + 10;
 
 
             GameObject prefabmonster = Instantiate(Monster, newPosMob, Quaternion.identity) as GameObject;
