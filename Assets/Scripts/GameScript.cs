@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour
 {
 
-    public int maxTime = 500;
-    int timeLeft;
+    public float maxTime = 500;
+    float timeLeft;
     // Start is called before the first frame update
 
     void Start()
@@ -21,7 +21,7 @@ public class GameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= (int)(Mathf.Round( Time.deltaTime));
+        timeLeft -= Time.deltaTime;
 
         if(timeLeft < 0)
         {

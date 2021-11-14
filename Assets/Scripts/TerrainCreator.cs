@@ -39,10 +39,10 @@ public class TerrainCreator : MonoBehaviour
         vert = m_Mf.sharedMesh.vertices;
 
         TreeCollector = new GameObject("TreeCollector");
-        //place_trees();
+        place_trees();
 
         MonsterCollector = new GameObject("MonsterCollector");
-        //place_monsters();
+        place_monsters();
 
     }
 
