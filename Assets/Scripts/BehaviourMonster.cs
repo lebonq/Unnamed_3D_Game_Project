@@ -35,4 +35,17 @@ public class BehaviourMonster : MonoBehaviour
 
         m_Rb.AddForce(new Vector3(0.3f,0,0), ForceMode.Acceleration);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerScript>().setDead();
+        }
+
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
