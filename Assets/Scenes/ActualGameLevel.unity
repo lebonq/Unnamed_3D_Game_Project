@@ -388,6 +388,10 @@ PrefabInstance:
       propertyPath: m_ZSize
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 4052723356883025462, guid: 43db91b14d1937d4d87f1451bf4683e2, type: 3}
+      propertyPath: MusicLauncher
+      value: 
+      objectReference: {fileID: 6342022030055181764, guid: 5f9a3658c318ab3478d8564d1663b9bd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43db91b14d1937d4d87f1451bf4683e2, type: 3}
 --- !u!4 &4052723356351538339 stripped

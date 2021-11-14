@@ -18,6 +18,8 @@ public class TerrainCreator : MonoBehaviour
     public GameObject leaves;
     public GameObject Monster;
 
+    public GameObject MusicLauncher;
+
 
     GameObject TreeCollector; // là où placer tt les instances creees
     GameObject MonsterCollector;
@@ -43,6 +45,8 @@ public class TerrainCreator : MonoBehaviour
 
         MonsterCollector = new GameObject("MonsterCollector");
         place_monsters();
+
+        GameObject background_music =  Instantiate(MusicLauncher, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 
     }
 
