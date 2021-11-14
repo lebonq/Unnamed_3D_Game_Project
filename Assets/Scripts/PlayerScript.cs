@@ -89,11 +89,12 @@ public class PlayerScript : MonoBehaviour
         this.gameObject.transform.GetChild(1).transform.localRotation = originalRotation * yQuaternion;
 
         // Use add force method to change de velocity
-
+        if (vInput != 0 || hInput != 0)
+        {
             Vector3 velocityDelta = (GetComponentInChildren<Transform>().forward * m_TranslationSpeed * vInput ) + (GetComponentInChildren<Transform>().right * m_TranslationSpeed * hInput);
             //On ajoute la gravité
             m_Rb.AddForce(velocityDelta - m_Rb.velocity, ForceMode.VelocityChange);
-        
+        }
 
 
     }
