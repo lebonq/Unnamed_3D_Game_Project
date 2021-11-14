@@ -256,7 +256,8 @@ MonoBehaviour:
     Lebon\n\nTree generation : Aleaume Landr\xE9a\n\nPlayer design: Aleaume Landr\xE9a\n\nPlayer
     and camera movements : Quentin Lebon & Aleaume Landr\xE9a\n\nInterface, Menu
     & screens : Aleaume Landr\xE9a\n\nInteractions & collisions : Quentin Lebon &
-    Aleaume Landr\xE9a\n\n\n\n\n\n\n\n(Use any key to go back to the Menu)"
+    Aleaume Landr\xE9a\n\nMonster Audio : Aleaume Landr\xE9a\n\n\n\n\n\n(Other sources
+    than us are described in ReleaseNotes.txt)\n(Use any key to go back to the Menu)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
