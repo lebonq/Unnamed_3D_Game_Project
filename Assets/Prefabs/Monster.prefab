@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpherifiedCubeNDivisions: 100
-  m_SpherifiedCubeRadius: 20
+  m_SpherifiedCubeRadius: 5
 --- !u!114 &4369211088441263652
 MonoBehaviour:
   m_ObjectHideFlags: 0
