@@ -42,7 +42,7 @@ public class TerrainCreator : MonoBehaviour
         //place_trees();
 
         MonsterCollector = new GameObject("MonsterCollector");
-        place_monsters();
+        //place_monsters();
 
     }
 
