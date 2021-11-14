@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameExitScript : MonoBehaviour
 {
+
+    float CumulTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,8 @@ public class GameExitScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey)
+        CumulTime += Time.deltaTime;
+        if (Input.anyKey && CumulTime > 3)
         {
             SceneManager.LoadScene(0);
         }
