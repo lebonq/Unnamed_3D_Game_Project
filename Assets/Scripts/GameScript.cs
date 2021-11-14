@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 
 public class GameScript : MonoBehaviour
 {
 
     public float maxTime = 500;
-    public float timeLeft;
+    float timeLeft;
     // Start is called before the first frame update
 
     void Start()
@@ -23,7 +25,7 @@ public class GameScript : MonoBehaviour
 
         if(timeLeft < 0)
         {
-            GameOver(1);
+            GameOver(0);
         }
     }
 
@@ -34,18 +36,19 @@ public class GameScript : MonoBehaviour
         style.fontSize = 40;
         style.normal.textColor = Color.white;
 
-        GUI.Label(new Rect(0, 0, 100, 100), "Time left : " + timeLeft + "s", style);
+        if (timeLeft >= 0) GUI.Label(new Rect(0, 0, 100, 100), "Time left : " + timeLeft + "s", style);
 
     }
 
     void GameOver(int type)
     {
-        if(type == 1)
+        if(type == 0)
         {
-            ;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         }
 
-        if(type == 2)
+        if (type == 1)
         {
             ;
         }
