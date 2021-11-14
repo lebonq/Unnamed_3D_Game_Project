@@ -27,6 +27,13 @@ public class GameScript : MonoBehaviour
         {
             GameOver(0);
         }
+
+        PlayerScript player = GameObject.Find("Player").GetComponent<PlayerScript>();
+
+        if (player.isDead())
+        {
+            GameOver(1);
+        }
     }
 
     void OnGUI()
