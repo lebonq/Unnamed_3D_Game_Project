@@ -17,6 +17,8 @@ public class TerrainCreator : MonoBehaviour
     public GameObject trunkPart;
     public GameObject leaves;
 
+    public GameObject TreeGatherer; // là où placer tt les instances creees
+
     private void Awake()
     {
         m_Mf = GetComponent<MeshFilter>();
@@ -29,6 +31,7 @@ public class TerrainCreator : MonoBehaviour
 
         gameObject.AddComponent<MeshCollider>();
 
+        TreeGatherer = new GameObject("TreeGatherer");
         place_trees();
     }
 
@@ -106,13 +109,18 @@ public class TerrainCreator : MonoBehaviour
         return mesh;
     }
 
+    float calc_distance(Vector3 a, Vector3 b)
+    {
+        return Mathf.Sqrt(Mathf.Pow(a.x - b.x,2) + Mathf.Pow(a.z - b.z,2));
+    }
+
     void place_trees()
     {
-        float nb_trees = Random.Range(80, 150);
+        float nb_trees = Random.Range(50, 150); // nombre d'arbres
 
         Vector3[] vert = m_Mf.sharedMesh.vertices;
 
-        for (int i = 0; i<nb_trees; i++)
+        for (int tree = 0; tree < nb_trees; tree++)
         {
             float posx_tree = Random.Range(0, 2000);
             float posz_tree = Random.Range(0, 2000);
@@ -121,48 +129,101 @@ public class TerrainCreator : MonoBehaviour
             newPos.x = posx_tree;
             newPos.z = posz_tree;
 
-            for (int tree = 0; tree < vert.Length; tree++)
-            {
-                if ((vert[tree].x - newPos.x) * (vert[tree].x - newPos.x) + (vert[tree].z - newPos.z) * (vert[tree].z - newPos.z) < 5)
+            float minidist = Mathf.Infinity; // la distance minimum
+            int idx_min = 0; // l'index min correspondant
+
+            for(int v = 0; v < vert.Length; v++) { // calcul des distances
+                float newdist = calc_distance(new Vector3(posx_tree, 0, posz_tree), vert[v]);
+
+                if (newdist < minidist)
                 {
-                   
-                    newPos.y = vert[i].y - 40;
-    
-                    break;
+                    minidist = newdist;
+                    idx_min = v;
                 }
-            }
+
+            } // ici on a la distance a la vertex min et son index
+
+            Vector3 v_min = vert[idx_min]; // la vertex la plus proche
+
+            newPos.y = v_min.y - 10;
 
             create_tree(newPos);
         }
     }
 
-    void create_tree(Vector3 newPos)
+    void create_tree(Vector3 newPos) // cree un seul arbre
     {
-        GameObject TreeGatherer = GameObject.Find("TreeGatherer");
-        int treeh = Random.Range(20, 80);
-        Vector3[] pointList;
-        Vector3 p0 = newPos;
+       
+        int treeh = Random.Range(40, 80); // taille random de l'arbre
+   
+        List<Vector3> branchlist = new List<Vector3>(); // chaque debut de branche de l'arbre
 
-        pointList = new Vector3[treeh];
-        pointList[0] = p0;
+        Vector3 precedent_trunk = newPos;  // on commence au debut
 
         // the trunk
         for (int points = 1; points<treeh; points++)
         {
-            Vector3 this_tree_pos = new Vector3(0,0,0);
-            this_tree_pos.x = pointList[points - 1].x + Random.Range(-2, 2);
-            this_tree_pos.y = pointList[points - 1].y + Random.Range(1, 5);
-            this_tree_pos.z = pointList[points - 1].z + Random.Range(-2, 2);
+            precedent_trunk = place_trunk_block(precedent_trunk); // on place le nouveau truk et on recupere sa position
 
-            pointList[points] = this_tree_pos;
+            if(Random.Range(0,4) == 0 && points > 30 && points < 65) // 20% de chance d'avoir une branche a chaque trunk
+            {
+                branchlist.Add(precedent_trunk); // add a branch to the tree.
+            }
 
-            Vector3 CreateAtPosition = pointList[points - 1] + (pointList[points] - pointList[points - 1]);
-            GameObject prefabtrunk = Instantiate(trunkPart, CreateAtPosition, Quaternion.identity) as GameObject;
-            prefabtrunk.transform.parent = TreeGatherer.transform;
+        } // create the trunk
+
+        place_leaves_block(precedent_trunk);
+        // l'arbre de base est fini
+
+
+        //maintenant, les branches
+        for(int b = 0; b < branchlist.Count; b++) // pour chaque debut de branche, on cree la suite
+        {
+            int direction_sprout_x = Random.Range(0, 1) == 0 ? -1 : 1; // on prend une valeur random. si elle est == 0, on dit croissance negative, sinon positive
+            int direction_sprout_z = Random.Range(0, 1) == 0 ? -1 : 1; // la  branche croit toujours dans la meme direction
+
+            int branch_len = Random.Range(6, 15); //longueur de la branche
+
+            Vector3 block_precedent = branchlist[b]; // le block précédent sur la branche. On commence a celui dans la liste
+            for(int block = 0; block < branch_len; block++)
+            {
+                block_precedent = place_branch_block(block_precedent, direction_sprout_x, direction_sprout_z); // on avance d'un block
+            }
+            place_leaves_block(block_precedent); // la branche actuelle est finie
+
         }
+    }
 
-        GameObject prefableaves = Instantiate(leaves, pointList[treeh - 1], Quaternion.identity) as GameObject; // leaves on top
-        prefableaves.transform.parent = TreeGatherer.transform;
 
+    Vector3 place_trunk_block(Vector3 position_precedent) // to place blocks on the tree trunk
+    {
+        Vector3 position_actual;
+        position_actual.x = position_precedent.x + Random.Range(-4, 4); ;
+        position_actual.y = position_precedent.y + Random.Range(1, 5);
+        position_actual.z = position_precedent.z + Random.Range(-4, 4);// position random par rapport au précédent, mais proche et toujours plus haut
+
+        GameObject prefabtrunk = Instantiate(trunkPart, position_actual, Quaternion.identity) as GameObject;
+        prefabtrunk.transform.parent = TreeGatherer.transform; // cree le nouveau trunk
+
+        return position_actual;
+    }
+
+    void place_leaves_block(Vector3 position) // to place leaves at the end
+    {
+        GameObject prefableaves = Instantiate(leaves, position, Quaternion.identity) as GameObject; // leaves on top
+        prefableaves.transform.parent = TreeGatherer.transform; // place leaves on top
+    }
+
+    Vector3 place_branch_block(Vector3 position_precedent, int x_factor, int z_factor) // to place blocks on the tree branch
+    {
+        Vector3 position_actual;
+        position_actual.x = position_precedent.x + Random.Range(0, 4) * x_factor;
+        position_actual.y = position_precedent.y + Random.Range(1, 3);
+        position_actual.z = position_precedent.z + Random.Range(0, 4) * z_factor;// position random par rapport au précédent, mais proche et toujours plus haut, et toujours meme direction
+
+        GameObject prefabtrunk = Instantiate(trunkPart, position_actual, Quaternion.identity) as GameObject;
+        prefabtrunk.transform.parent = TreeGatherer.transform; // cree le nouveau trunk
+
+        return position_actual;
     }
 }
