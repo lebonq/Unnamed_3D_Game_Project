@@ -90,7 +90,6 @@ public class PlayerScript : MonoBehaviour
         {
             Vector3 velocityDelta = GetComponentInChildren<Transform>().forward * m_TranslationSpeed * vInput - m_Rb.velocity;
             m_Rb.AddForce(velocityDelta, ForceMode.VelocityChange);
-            m_Rb.AddForce(-transform.up * 9.81f, ForceMode.Force);
         }
     }
 
