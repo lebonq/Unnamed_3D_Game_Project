@@ -5,22 +5,23 @@ using MyMathTools;
 
 public class PlayerScript : MonoBehaviour
 {
-
     public float m_TranslationSpeed;
-    //public float m_RotationSpeed;
 
     Rigidbody m_Rb;
-
-    public Vector2 turn;
-    public float sensitivity = 10f;
+    Transform m_RbHead;
 
     float vInput;
     float hInput;
 
+    public Vector2 turn;
+    public float sensitivityY = 2f;
+    public float sensitivityX = 4f;
+    Quaternion originalRotation;
 
     // Start is called before the first frame update
     void Start()
     {
+        originalRotation = transform.localRotation;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -38,49 +39,50 @@ public class PlayerScript : MonoBehaviour
         transform.position = newPos;
     }
 
-
-
     private void Awake()
     {
         m_Rb = GetComponent<Rigidbody>();
+        m_RbHead = GetComponentInChildren<Transform>();
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        turn.x += Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime;
-        turn.y += Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime;
-
-
         vInput = Input.GetAxis("Vertical");
         hInput = Input.GetAxis("Horizontal");
-        //transform.localRotation = Quaternion.Euler(0, turn.x, 0);
-        // transform.position += transform.forward * vInput * Time.deltaTime * m_TranslationSpeed;
-        //transform.localRotation = Quaternion.AngleAxis(turn.x * Time.deltaTime*sensitivity,Vector3.up) * transform.rotation;
+        turn.x += Input.GetAxis("Mouse X") * sensitivityX;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivityY;
     }
 
-    private void FixedUpdate(){
-        
+    private void FixedUpdate()
+    {
 
-        // Vector3 moveVect = transform.forward * vInput * Time.fixedDeltaTime * m_TranslationSpeed;
-        // m_Rb.MovePosition(m_Rb.position+moveVect);
-        m_Rb.MoveRotation(Quaternion.AngleAxis(turn.x,Vector3.up) * transform.rotation);
+        float roty = Mathf.Clamp(turn.y, -90f, 90f);
+        if (turn.y < roty || turn.y > roty)
+        {
+            turn.y = roty;
+        }
+        //Get the rotation you will be at next as a Quaternion
+        Quaternion yQuaternion = Quaternion.AngleAxis(roty, Vector3.left);
+        Quaternion xQuaternion = Quaternion.AngleAxis(turn.x, Vector3.up);
 
-        // m_Rb.angularVelocity = Vector3.zero;
+        //Move body on x axis
+
+        transform.localRotation = originalRotation * xQuaternion;
+        //move head on Y axis
+        this.gameObject.transform.GetChild(1).transform.localRotation = originalRotation * yQuaternion;
 
         // Use add force method to change de velocity
-        if(vInput != 0 || hInput != 0){
-            Vector3 velocityDelta = transform.forward * m_TranslationSpeed * vInput - m_Rb.velocity;
-            m_Rb.AddForce(velocityDelta,ForceMode.VelocityChange);
-            m_Rb.AddForce(Vector3.down, ForceMode.Force);
-
-            //Vector3 angularVelocityDelta = Vector3.up*m_RotationSpeed*Mathf.Deg2Rad*hInput-m_Rb.angularVelocity;
-            //m_Rb.AddTorque(angularVelocityDelta, ForceMode.VelocityChange);
+        if (vInput != 0 || hInput != 0)
+        {
+            Vector3 velocityDelta = GetComponentInChildren<Transform>().forward * m_TranslationSpeed * vInput - m_Rb.velocity;
+            m_Rb.AddForce(velocityDelta, ForceMode.VelocityChange);
+            m_Rb.AddForce(transform.up * 9.81f, ForceMode.Force);
         }
     }
 
-    private void OnCollisionEnter(Collision collision){
+    private void OnCollisionEnter(Collision collision)
+    {
 
     }
 }
