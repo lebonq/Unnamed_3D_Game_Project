@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinSurvival.unity
     guid: d6c1dc00d1ef3e04d834f7a6a8a52e25
+  - enabled: 1
+    path: Assets/Scenes/LossDeath.unity
+    guid: 17c316b7570387849b62b89681f8be0e
   m_configObjects: {}

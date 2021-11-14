@@ -50,7 +50,8 @@ public class GameScript : MonoBehaviour
 
         if (type == 1)
         {
-            ;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+
         }
     }
 }
