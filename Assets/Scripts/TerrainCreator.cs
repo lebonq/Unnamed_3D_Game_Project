@@ -171,7 +171,7 @@ public class TerrainCreator : MonoBehaviour
         place_leaves_block(precedent_trunk);
         // l'arbre de base est fini
 
-
+        /*
         //maintenant, les branches
         for(int b = 0; b < branchlist.Count; b++) // pour chaque debut de branche, on cree la suite
         {
@@ -187,7 +187,7 @@ public class TerrainCreator : MonoBehaviour
             }
             place_leaves_block(block_precedent); // la branche actuelle est finie
 
-        }
+        }*/
     }
 
 
