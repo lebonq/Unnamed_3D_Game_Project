@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4052723356883025457}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   trunkPart: {fileID: 1330705394601555736, guid: fe10ae2915dd0a642ad0fbb1570905a2, type: 3}
   leaves: {fileID: 318428740973980882, guid: a9c093a4538240d4090bfb62748b01de, type: 3}
   Monster: {fileID: 2940092971194718709, guid: b880582443239b04587c5152de91ed54, type: 3}
+  MusicLauncher: {fileID: 0}
 --- !u!64 &4052723356883025466
 MeshCollider:
   m_ObjectHideFlags: 0

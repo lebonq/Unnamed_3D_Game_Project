@@ -36,9 +36,9 @@ Shader "Custom/TextureDependingNormal"
             float h = IN.worldPos.y;
 
             if (IN.worldNormal.y > 0.73){
-                if(h < 20) o.Albedo = tex2D(_FloorTex, IN.uv_FloorTex).rgb;
-                if(h >= 20 && h < 40) o.Albedo = tex2D(_FloorMidHeightTex, IN.uv_FloorMidHeightTex).rgb;
-                if(h >= 40) o.Albedo = tex2D(_FloorSnow, IN.uv_FloorSnow).rgb;
+                if(h < 0) o.Albedo = tex2D(_FloorTex, IN.uv_FloorTex).rgb;
+                if(h >= 0 && h < 20) o.Albedo = tex2D(_FloorMidHeightTex, IN.uv_FloorMidHeightTex).rgb;
+                if(h >= 20) o.Albedo = tex2D(_FloorSnow, IN.uv_FloorSnow).rgb;
             }
             else{
                 o.Albedo = tex2D(_WallTex, IN.uv_WallTex).rgb;
